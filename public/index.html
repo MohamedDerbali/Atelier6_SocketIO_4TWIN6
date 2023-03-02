@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>welcome to socket</h1>
+    <input type="name" id="name" placeholder="write your name here..." />
+    <button onclick="hello()">envoyer</button>
+    <p id="content">
+
+    </p>
+    <script src="./socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <script>
+       function hello(){
+        var socket = io('http://localhost:5000');
+        var name = document.getElementById("name").value;
+        socket.on('greeting', (message)=>{
+            console.log("listening on socket...")
+            document.getElementById("content").innerHTML += message+"</br>";
+        })
+        socket.emit('greeting', name);
+        }
+    </script>
+</body>
+</html>
